@@ -1,0 +1,62 @@
+#!/usr/bin/env python3
+#
+# Copyright (C) 2020 bacardi55
+# Licensed under the GPL version 3 and above
+#
+# A A2DP to HSP/HFP switcher for bluetooth headset.
+
+import os
+import pulsectl
+
+card_name = "bluez_card.4C_87_5D_2B_62_1D"
+
+def clicked():
+    '''Returns True if the button was clicked'''
+    button = "BLOCK_BUTTON" in os.environ and os.environ["BLOCK_BUTTON"]
+    return bool(button)
+
+def generate_output(bt_mode='none'):
+    '''Returns output based on mode ('AD2P', 'HeadUnit', 'none')'''
+    if bt_mode == 'a2dp_sink':
+        output = "<span color='red'><span font='FontAwesome'>\uf025</span></span>"
+    elif bt_mode == 'headset_head_unit':
+        output = "<span color='green'><span font='FontAwesome'>\uf130</span></span>"
+    else:
+        output = ""
+
+    return output
+
+def set_profile_for_bt_card(pulse, card, profile):
+    '''Change pulseaudio profile for bluetooth card'''
+    pulse.card_profile_set(card, profile)
+
+
+if os.environ.get('bluetoothcard') == None:
+    # If not configured properly, avoid errors.
+    print(generate_output('none'))
+    exit()
+
+card_name = os.environ.get('bluetoothcard')
+
+bt_card = False
+mode = "none"
+pulse = pulsectl.Pulse('home')
+
+for card in pulse.card_list():
+    if card_name in card.name:
+        bt_card = True
+        if "a2dp_sink" in card.profile_active.name:
+            mode = 'a2dp_sink'
+        elif "headset_head_unit" in card.profile_active.name:
+            mode = 'headset_head_unit'
+
+if clicked():
+    if mode == 'a2dp_sink':
+        mode = 'headset_head_unit'
+    elif mode == 'headset_head_unit':
+        mode = 'a2dp_sink'
+    set_profile_for_bt_card(pulse, card, mode)
+
+#print(mode)
+print(generate_output(mode))
+
