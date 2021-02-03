@@ -8,8 +8,6 @@
 import os
 import pulsectl
 
-card_name = "bluez_card.4C_87_5D_2B_62_1D"
-
 def clicked():
     '''Returns True if the button was clicked'''
     button = "BLOCK_BUTTON" in os.environ and os.environ["BLOCK_BUTTON"]
