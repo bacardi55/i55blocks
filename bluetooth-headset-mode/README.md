@@ -10,15 +10,28 @@ Allow to switch your Bluetooth Headset profile between AD2P (good sound quality 
 
 # Dependencies
 
-fonts-font-awesome, python3, [pulsectl](https://github.com/mk-fg/python-pulse-control) (I installed it via pip3).
+fonts-font-awesome, python3, [pulsectl](https://github.com/mk-fg/python-pulse-control)
 
 # Installation
+
+If you don't have it yet, install pip3 and pulsectl
+```bash
+pip3 install -U pulsectl
+```
+
+And then clone this repo:
+
+```bash
+git clone https://gitlab.com/bacardi55/i55blocks.git
+```
+
+# Configuration
 
 To use with i3blocks, use the following in `i3blocks.conf` file:
 
 ```INI
 [bt_headset_mode]
-command=$SCRIPT_DIR/bt_headset_mode
+command=$SCRIPT_DIR/Bluetooth-headset-mode/bt_headset_mode
 markup=pango
 interval=10
 bluetoothcard=<NameOfYourBluetoothCard>
