@@ -49,3 +49,9 @@ Name: bluez_card.4C_87_5D_2B_62_1D
 ```
 
 use the full name for the `bluetoothcard` variable.
+
+
+If you want to use the script to switch with a keybind in i3, you can also use it like this:
+```bash
+bindsym $mod+Mod1+p exec --no-startup-id export BLOCK_BUTTON=true && export bluetoothcard="<NameOfYourBluetoothCard>" && /usr/bin/python3 /home/bacardi55/workspace/perso/i55blocks/bluetooth-headset-mode/bt_headset_mode
+```
