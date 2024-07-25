@@ -1,3 +1,5 @@
+Official repository and project is on [soucehut](https://git.sr.ht/~bacardi55/i55blocks). This repository is archived.
+
 # i55blocks
 
 My custom blocks for i3blocks
